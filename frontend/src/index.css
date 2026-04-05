@@ -1,0 +1,53 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  * { box-sizing: border-box; }
+
+  body {
+    @apply bg-ink text-white font-body;
+    background-image: theme('backgroundImage.grid-pattern');
+    background-size: theme('backgroundSize.grid');
+  }
+
+  ::-webkit-scrollbar        { @apply w-1.5; }
+  ::-webkit-scrollbar-track  { @apply bg-ink; }
+  ::-webkit-scrollbar-thumb  { @apply bg-border rounded-full; }
+  ::-webkit-scrollbar-thumb:hover { @apply bg-muted; }
+}
+
+@layer components {
+  .card {
+    @apply bg-card border border-border rounded-2xl shadow-card;
+  }
+  .btn-primary {
+    @apply bg-cyan text-ink font-display font-semibold px-6 py-2.5 rounded-xl
+           hover:bg-cyan-dim transition-all duration-200 shadow-glow-sm
+           hover:shadow-glow disabled:opacity-40 disabled:cursor-not-allowed;
+  }
+  .btn-ghost {
+    @apply border border-border text-subtle font-body px-5 py-2.5 rounded-xl
+           hover:border-cyan hover:text-cyan transition-all duration-200;
+  }
+  .input-field {
+    @apply bg-ink border border-border rounded-xl px-4 py-2.5 text-white
+           font-mono text-sm w-full focus:outline-none focus:border-cyan
+           focus:ring-1 focus:ring-cyan/30 transition-all duration-200
+           placeholder:text-muted;
+  }
+  .sigma-badge {
+    @apply inline-flex items-center gap-1.5 px-3 py-1 rounded-full text-xs font-display font-semibold;
+  }
+}
+
+/* Staggered animation helpers */
+.stagger > * { opacity: 0; animation: fade-up 0.5s ease forwards; }
+.stagger > *:nth-child(1)  { animation-delay: 0.05s; }
+.stagger > *:nth-child(2)  { animation-delay: 0.10s; }
+.stagger > *:nth-child(3)  { animation-delay: 0.15s; }
+.stagger > *:nth-child(4)  { animation-delay: 0.20s; }
+.stagger > *:nth-child(5)  { animation-delay: 0.25s; }
+.stagger > *:nth-child(6)  { animation-delay: 0.30s; }
+.stagger > *:nth-child(7)  { animation-delay: 0.35s; }
+.stagger > *:nth-child(8)  { animation-delay: 0.40s; }
