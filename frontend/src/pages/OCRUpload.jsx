@@ -49,9 +49,9 @@ const OCRUpload = () => {
   };
 
   return (
-    <div className="pt-12 md:pt-32 px-6 max-w-screen-xl mx-auto pb-32">
+    <div className="pt-8 md:pt-32 px-4 md:px-6 max-w-screen-xl mx-auto pb-32">
       <section className="mb-12">
-        <h2 className="serif-editorial text-5xl md:text-7xl font-light tracking-tight text-primary italic mb-4">The Verdant Aura</h2>
+        <h2 className="serif-editorial text-4xl md:text-7xl font-light tracking-tight text-primary italic mb-4">The Verdant Aura</h2>
         <p className="text-on-surface-variant text-lg md:text-xl max-w-2xl font-light border-none">
           Transforming clinical data into clear, actionable insights through Sigma's advanced OCR neural processing.
         </p>
@@ -65,7 +65,7 @@ const OCRUpload = () => {
             <div 
               onDragEnter={handleDrag} onDragLeave={handleDrag} onDragOver={handleDrag} onDrop={handleDrop}
               onClick={() => !loading && inputRef.current?.click()}
-              className={`relative bg-surface-container-low border-2 border-dashed ${dragActive ? 'border-primary' : 'border-outline-variant/30'} rounded-xl p-12 flex flex-col items-center justify-center text-center transition-all hover:bg-surface-container cursor-pointer`}
+              className={`relative bg-surface-container-low border-2 border-dashed ${dragActive ? 'border-primary' : 'border-outline-variant/30'} rounded-xl p-6 md:p-12 flex flex-col items-center justify-center text-center transition-all hover:bg-surface-container cursor-pointer`}
             >
               <input ref={inputRef} type="file" className="hidden" accept="application/pdf,image/png,image/jpeg,text/plain" onChange={handleChange} />
               <div className="w-20 h-20 bg-primary-fixed rounded-full flex items-center justify-center mb-6">
@@ -75,7 +75,7 @@ const OCRUpload = () => {
                 {file ? file.name : (loading ? 'Processing...' : 'Upload Lab Report')}
               </h3>
               <p className="text-on-surface-variant mb-6 max-w-xs">{file ? `Size: ${(file.size/1024/1024).toFixed(2)} MB` : 'Drag and drop your medical PDF, JPG, or PNG files here for instant analysis.'}</p>
-              {!file && <button className="bg-primary text-on-primary rounded-full px-8 py-3 font-medium pointer-events-none">Select Files</button>}
+              {!file && <button className="w-full sm:w-auto bg-primary text-on-primary rounded-full px-8 py-3 font-medium pointer-events-none">Select Files</button>}
               <p className="mt-4 text-xs text-outline font-medium uppercase tracking-widest">Max file size 25MB</p>
             </div>
           </div>

@@ -53,7 +53,7 @@ const ManualEntry = () => {
   };
 
   return (
-    <div className="max-w-screen-2xl mx-auto px-8 pt-12 text-on-surface">
+    <div className="max-w-screen-2xl mx-auto px-4 md:px-8 pt-8 md:pt-12 pb-24 text-on-surface">
       <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 mb-16">
         <div className="lg:col-span-7">
           <div className="flex items-center gap-3 mb-6">
@@ -63,11 +63,11 @@ const ManualEntry = () => {
             </div>
             <span className="text-on-surface-variant/60 text-sm italic">Sigma Backend Status</span>
           </div>
-          <h2 className="text-6xl md:text-8xl font-light italic tracking-tight text-primary mb-8 serif-editorial">Manual Entry</h2>
+          <h2 className="text-5xl md:text-8xl font-light italic tracking-tight text-primary mb-6 md:mb-8 serif-editorial">Manual Entry</h2>
           <p className="text-xl text-on-surface-variant max-w-xl leading-relaxed mb-10">
             Precision input for hematology metrics. Ensure all values align with standard calibration before final submission to the analyzer core.
           </p>
-          <button onClick={handleSubmit} disabled={loading || Object.keys(values).length === 0} className="bg-primary text-on-primary px-10 py-5 rounded-full font-bold text-lg hover:bg-primary-container transition-all active:scale-95 shadow-xl shadow-primary/10 disabled:opacity-50">
+          <button onClick={handleSubmit} disabled={loading || Object.keys(values).length === 0} className="w-full md:w-auto bg-primary text-on-primary px-6 md:px-10 py-4 md:py-5 rounded-full font-bold text-lg hover:bg-primary-container transition-all active:scale-95 shadow-xl shadow-primary/10 disabled:opacity-50">
             {loading ? 'Processing...' : 'Submit to Core Analyzer'}
           </button>
         </div>
@@ -82,7 +82,7 @@ const ManualEntry = () => {
         </div>
       </div>
 
-      <div className="grid grid-cols-1 xl:grid-cols-3 gap-12 items-start mb-24">
+      <div className="grid grid-cols-1 xl:grid-cols-3 gap-8 md:gap-12 items-start mb-16 md:mb-24">
         <form onSubmit={handleSubmit} className="xl:col-span-2 grid grid-cols-1 md:grid-cols-2 gap-6">
           {params.map((p, idx) => (
             <div key={p} className="bg-surface-container-low p-8 rounded-xl flex flex-col gap-6">

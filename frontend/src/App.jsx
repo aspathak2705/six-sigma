@@ -12,7 +12,7 @@ const TopNav = () => {
 
   return (
     <header className="bg-[#fbfaee] shadow-[0_1px_0_0_rgba(0,52,43,0.05)] docked full-width top-0 z-50 sticky">
-      <div className="flex justify-between items-center px-8 py-6 w-full max-w-screen-2xl mx-auto">
+      <div className="flex justify-between items-center px-4 md:px-8 py-4 md:py-6 w-full max-w-screen-2xl mx-auto">
         <div className="flex items-center gap-4">
           <h1 className="text-3xl font-['Newsreader'] italic text-[#00342b] font-light tracking-tight">Sigma</h1>
         </div>
@@ -61,7 +61,7 @@ const App = () => {
     <BrowserRouter>
       <div className="flex flex-col min-h-screen bg-surface">
         <TopNav />
-        <main className="flex-1 w-full pb-32">
+        <main className="flex-1 w-full pb-24 md:pb-32">
           <Routes>
             <Route path="/" element={<Dashboard />} />
             <Route path="/manual" element={<ManualEntry />} />

@@ -7,10 +7,10 @@ const ResultsTable = ({ results }) => {
   if (!results || results.length === 0) return null;
 
   return (
-    <div className="bg-surface-container rounded-xl p-8 md:p-10 shadow-sm mt-8">
-      <div className="flex items-center justify-between mb-8">
-        <h3 className="text-2xl font-headline text-primary italic">Detail Results Table</h3>
-        <span className="text-sm font-label text-on-surface-variant">Live Data Source: HL7-SIGMA-V2</span>
+    <div className="bg-surface-container rounded-xl p-4 md:p-10 shadow-sm mt-6 md:mt-8">
+      <div className="flex flex-col sm:flex-row sm:items-center justify-between mb-6 md:mb-8 gap-2">
+        <h3 className="text-xl md:text-2xl font-headline text-primary italic">Detail Results Table</h3>
+        <span className="text-xs md:text-sm font-label text-on-surface-variant">Live Data Source: HL7-SIGMA-V2</span>
       </div>
       
       <div className="overflow-x-auto bg-surface-container-lowest rounded-lg">

@@ -18,14 +18,14 @@ const Dashboard = () => {
 
   if (!results) {
     return (
-      <div className="pt-32 pb-32 px-6 max-w-7xl mx-auto min-h-[70vh] flex flex-col justify-center items-center text-center">
-        <h1 className="serif-editorial text-5xl md:text-7xl font-light italic text-primary leading-tight tracking-tight mb-4">
+      <div className="pt-16 md:pt-32 pb-16 md:pb-32 px-4 md:px-6 max-w-7xl mx-auto min-h-[70vh] flex flex-col justify-center items-center text-center">
+        <h1 className="serif-editorial text-4xl md:text-7xl font-light italic text-primary leading-tight tracking-tight mb-4">
           Welcome to Sigma
         </h1>
         <p className="text-on-surface-variant text-lg max-w-2xl font-body leading-relaxed mb-10">
           Your diagnostic analytics hub. Upload a document or manually enter parameters to visualize the system.
         </p>
-        <div className="flex gap-4">
+        <div className="flex flex-col sm:flex-row w-full sm:w-auto px-4 sm:px-0 gap-4 mt-4">
           <button onClick={() => navigate('/upload')} className="bg-primary hover:bg-primary-container text-on-primary rounded-full px-8 py-3 font-semibold transition-colors shadow-lg active:scale-95">
             Upload Report
           </button>
@@ -43,9 +43,9 @@ const Dashboard = () => {
   const accCount = totalParams - poorCount;
 
   return (
-    <div className="pt-32 pb-32 px-6 max-w-7xl mx-auto min-h-screen">
+    <div className="pt-16 md:pt-32 pb-24 md:pb-32 px-4 md:px-6 max-w-7xl mx-auto min-h-screen">
       <section className="mb-16">
-        <h1 className="serif-editorial text-5xl md:text-7xl font-light italic text-primary leading-tight tracking-tight mb-4">
+        <h1 className="serif-editorial text-4xl md:text-7xl font-light italic text-primary leading-tight tracking-tight mb-4">
           System Overview
         </h1>
         <p className="text-on-surface-variant text-lg max-w-2xl font-body leading-relaxed">
