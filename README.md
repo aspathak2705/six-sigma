@@ -1,170 +1,134 @@
-git# 🧪 Sigma Lab Report Analyzer
-
-Full-stack Six Sigma hematology QC analyzer.
-**Frontend**: React + Tailwind CSS (Vite) | **Backend**: FastAPI (Python)
-
----
-
-## Project Structure
-
-```
-sigma-analyzer/
-├── backend/
-│   ├── main.py                   ← FastAPI entry point
-│   ├── requirements.txt
-│   ├── data/
-│   │   └── values.xlsx           ← ⚠️  Place your QC file here
-│   └── app/
-│       ├── core/
-│       │   ├── sigma_engine.py   ← Sigma calculation logic
-│       │   └── ocr.py            ← Text extraction (PDF/image/txt)
-│       └── routes/
-│           ├── analyze.py        ← POST /api/analyze (manual)
-│           └── upload.py         ← POST /api/upload (OCR) + /export
-└── frontend/
-    ├── index.html
-    ├── vite.config.js
-    ├── tailwind.config.js
-    └── src/
-        ├── App.jsx               ← Router + sidebar layout
-        ├── api/
-        │   ├── client.js         ← Axios API calls
-        │   └── utils.js          ← Sigma color/format helpers
-        ├── components/
-        │   ├── ResultsTable.jsx
-        │   ├── SigmaChart.jsx
-        │   ├── SigmaBadge.jsx
-        │   ├── StatCard.jsx
-        │   └── PageHeader.jsx
-        └── pages/
-            ├── Dashboard.jsx
-            ├── ManualEntry.jsx
-            ├── OCRUpload.jsx
-            └── ExportPage.jsx
-```
+<div align="center">
+  <img src="https://img.icons8.com/color/96/000000/microscope.png" alt="Sigma Analyzer Logo" width="80" />
+  <h1 align="center">Sigma Analyzer</h1>
+  <p align="center">
+    <strong>A Premium, AI-Powered Clinical Diagnostic & Six Sigma QC Hub</strong>
+  </p>
+  <p align="center">
+    <a href="https://github.com/aspathak2705/six-sigma/stargazers"><img src="https://img.shields.io/github/stars/aspathak2705/six-sigma" alt="Stars" /></a>
+    <a href="https://github.com/aspathak2705/six-sigma/network/members"><img src="https://img.shields.io/github/forks/aspathak2705/six-sigma" alt="Forks" /></a>
+    <img src="https://img.shields.io/badge/Frontend-React%20%7C%20Vite-blue" alt="Frontend" />
+    <img src="https://img.shields.io/badge/Backend-FastAPI-009688" alt="Backend" />
+    <img src="https://img.shields.io/badge/Styling-TailwindCSS-38B2AC" alt="Styling" />
+  </p>
+</div>
 
 ---
 
-## ⚙️ Setup
+## 📖 Overview
 
-### 1. Place your QC data file
+The **Sigma Lab Report Analyzer** is a state-of-the-art laboratory quality control application. It seamlessly blends OCR machine-learning with rigorous clinical formulas, allowing healthcare professionals to feed raw hematopathology data (via PDF, image, or manual entry) directly into a predictive **Six Sigma** analysis engine. 
 
-Copy your `values.xlsx` (the fixed one) into:
-```
-backend/data/values.xlsx
-```
+Designed around the "Verdant Aura" clinical aesthetic, the platform guarantees not only accuracy but also a visually stunning, responsive, and seamless user experience.
 
-### 2. Backend
+<br>
 
+## ✨ Key Features
+
+- **🧠 Neural OCR Extraction:** Drag and drop medical PDFs or JPGs/PNGs. The backend architecture automatically parses physiological parameters from raw clinical documents via Tesseract OCR.
+- **🧮 Automated Six Sigma Engine:** Computes Sigma ($\sigma$) values dynamically utilizing internal clinical QC data (`values.xlsx`) and the strict CLIA 2024 TEa% Benchmarks.
+- **📊 Real-time Clinical Dashboard:** Visualizes overall system health, categorizing analytical performance from "Poor" to "World Class".
+- **📱 Fully Responsive:** Carefully crafted layouts that adapt seamlessly from ultrafine desktop monitors to mobile iOS/Android devices.
+- **📤 Export to Excel:** Instantly generate formatted diagnostic reports for institutional archives.
+
+<br>
+
+## 🛠️ Architecture & Tech Stack
+
+This project is decoupled into two primary architectures: a highly responsive React Single Page Application (SPA) and an asynchronous Python/FastAPI calculation server.
+
+### Frontend
+- **Framework:** React 18 & Vite
+- **Styling:** Tailwind CSS (Custom "Verdant Aura" Design System)
+- **Routing:** React Router v6
+- **Charting:** Recharts
+- **HTTP Client:** Axios
+- **Deployment Strategy:** Vercel (Configured with custom routing `vercel.json`)
+
+### Backend
+- **Framework:** FastAPI (Python 3.11+)
+- **OCR Engine:** Pytesseract (Tesseract OCR) & PDFPlumber
+- **Data Science:** Pandas, OpenPyXL, Numpy
+- **Server:** Uvicorn
+- **Deployment Strategy:** Docker (Optimized for Render / AWS)
+
+<br>
+
+## 🚀 Getting Started (Local Development)
+
+### Prerequisites
+- Node.js `v18+`
+- Python `3.10+`
+- [Tesseract OCR](https://github.com/tesseract-ocr/tesseract) installed on your operating system (Required for backend).
+
+### 1. Backend Setup (FastAPI)
 ```bash
+# Navigate to backend
 cd backend
 
-# Create virtual environment
+# Create and activate virtual environment
 python -m venv venv
+source venv/bin/activate  # On Windows use `venv\Scripts\activate`
 
-# Activate it
-# Windows:
-venv\Scripts\activate
-# Mac/Linux:
-source venv/bin/activate
-
-# Install dependencies
+# Install core dependencies
 pip install -r requirements.txt
 
-# Run the API server
+# Start the server (Development)
 uvicorn main:app --reload --port 8000
 ```
+*Note: Make sure your QC Excel database is present at `backend/data/values.xlsx`.*
 
-Backend will be live at: http://localhost:8000
-API docs (auto-generated): http://localhost:8000/docs
-
-### 3. Frontend
-
+### 2. Frontend Setup (React/Vite)
 ```bash
+# Open a new terminal and navigate to frontend
 cd frontend
 
-# Install npm packages
+# Install package dependencies
 npm install
 
-# Start dev server
+# Start Vite development server
 npm run dev
 ```
 
-Frontend will be live at: http://localhost:5173
-
----
-
-## 🔌 API Endpoints
-
-| Method | Endpoint          | Description                          |
-|--------|-------------------|--------------------------------------|
-| GET    | /api/parameters   | List supported QC parameters         |
-| POST   | /api/analyze      | Manual entry → Sigma results         |
-| POST   | /api/upload       | File upload → OCR → Sigma results    |
-| POST   | /api/export       | Results list → Excel file download   |
-| GET    | /api/qc-reference | Raw QC reference data (debug)        |
-
-### POST /api/analyze — Request body
-```json
-{
-  "values": {
-    "WBC": 5.6,
-    "RBC": 4.2,
-    "HGB": 13.5,
-    "HCT": 40.1
-  }
-}
+### 3. Environment Configuration
+Create a `.env.local` inside the `frontend` directory (Optional for local dev as Vite defaults to `/api` proxy):
+```env
+VITE_API_URL=http://localhost:8000/api
 ```
 
----
+<br>
 
-## 🧮 Six Sigma Formula
+## 🔌 API Endpoints Reference
 
-```
-σ = (TEa% − |Bias%|) / CV%
-```
+The FastAPI backend automatically generates interactive Swagger documentation. When the backend is running, navigate to `http://localhost:8000/docs` to test endpoints directly in your browser.
 
-| Parameter          | Bias% Method         | TEa% (CLIA 2024) |
-|--------------------|----------------------|-----------------|
-| WBC, RBC, HGB, HCT | Predefined (Excel)  | 10%, 4%, 4%, 4% |
-| MCV, MCH, MCHC     | Calculated at runtime| 7%, 7%, 7%      |
+| Method | Endpoint              | Description                                                    |
+|--------|-----------------------|----------------------------------------------------------------|
+| `GET`  | `/api/parameters`     | Fetch dynamic parameters supported by the Six Sigma engine.    |
+| `POST` | `/api/analyze`        | Submit manual JSON payload for clinical calculation.           |
+| `POST` | `/api/upload`         | Upload `multipart/form-data` for OCR extraction and analysis.  |
+| `POST` | `/api/export`         | Export processed clinical JSON into an institutional XLSX file.|
 
-### Sigma Performance Scale
-| Sigma | Rating      |
-|-------|-------------|
-| ≥ 6   | World Class |
-| 5–6   | Excellent   |
-| 4–5   | Good        |
-| 3–4   | Marginal    |
-| < 3   | Poor        |
 
----
+<br>
 
-## 🖥️ Pages
+## 🧬 Scientific Methodology: Six Sigma
 
-| Page         | Route     | Description                              |
-|--------------|-----------|------------------------------------------|
-| Dashboard    | /         | Summary stats, chart, full results table |
-| Manual Entry | /manual   | Enter values directly via form           |
-| OCR Upload   | /upload   | Upload PDF/image/txt for auto-extraction |
-| Export       | /export   | Download results as formatted Excel      |
+The clinical intelligence core relies on the standard laboratory Quality Control formula:
+> **$\sigma = (TE_{a} - |Bias|) / CV$**
+
+Where:
+- **$TE_{a}$**: Total Allowable Error (benchmarked against updated CLIA 2024 records).
+- **Bias**: Measure of systematic error or inaccuracy.
+- **CV**: Coefficient of Variation (analytical precision).
+
+Results are quantified natively into 5 clinical stages:
+`World Class (>6)` • `Excellent (5-6)` • `Good (4-5)` • `Marginal (3-4)` • `Poor (<3)`
+
+<br>
 
 ---
 
-## 📦 Tech Stack
-
-**Frontend**
-- React 18 + React Router 6
-- Tailwind CSS 3
-- Recharts (bar chart)
-- Axios (API calls)
-- Lucide React (icons)
-- Vite (dev server + bundler)
-
-**Backend**
-- FastAPI
-- Pandas + OpenPyXL + XlsxWriter
-- PDFPlumber (PDF text extraction)
-- Pytesseract (OCR for images)
-- Pillow (image handling)
-- Uvicorn (ASGI server)
+<div align="center">
+    <p>Built with precision and care. 🧬</p>
+</div>
