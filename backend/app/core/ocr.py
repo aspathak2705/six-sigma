@@ -23,14 +23,14 @@ def extract_text_from_bytes(content: bytes, content_type: str) -> str:
 
 # Parameter patterns — order matters (MCHC before MCH)
 _PATTERNS = {
-    "MCHC": r"MCHC[^\d]{0,10}(\d+\.?\d*)",
-    "MCH":  r"MCH\b[^\d]{0,10}(\d+\.?\d*)",
-    "MCV":  r"MCV[^\d]{0,10}(\d+\.?\d*)",
-    "WBC":  r"(?:WBC|White\s+Blood\s+Cells?)[^\d]{0,10}(\d+\.?\d*)",
-    "RBC":  r"(?:RBC|Red\s+Blood\s+Cells?)[^\d]{0,10}(\d+\.?\d*)",
-    "HGB":  r"(?:HGB|HB|Hemoglobin)[^\d]{0,10}(\d+\.?\d*)",
-    "HCT":  r"(?:HCT|Hematocrit)[^\d]{0,10}(\d+\.?\d*)",
-    "PLT":  r"(?:PLT|Platelets?)[^\d]{0,10}(\d+\.?\d*)",
+    "MCHC": r"MCHC(?:[^\d]{0,50})(\d+[\.,]\d*)",
+    "MCH":  r"MCH\b(?:[^\d]{0,50})(\d+[\.,]\d*)",
+    "MCV":  r"MCV(?:[^\d]{0,50})(\d+[\.,]\d*)",
+    "WBC":  r"(?:WBC|White\s+Blood\s+Cells?)(?:[^\d]{0,50})(\d+[\.,]?\d*)",
+    "RBC":  r"(?:RBC|Red\s+Blood\s+Cells?)(?:[^\d]{0,50})(\d+[\.,]?\d*)",
+    "HGB":  r"(?:HGB|HB|Hemoglobin)(?:[^\d]{0,50})(\d+[\.,]?\d*)",
+    "HCT":  r"(?:HCT|Hematocrit)(?:[^\d]{0,50})(\d+[\.,]?\d*)",
+    "PLT":  r"(?:PLT|Platelets?)(?:[^\d]{0,50})(\d+[\.,]?\d*)",
 }
 
 
@@ -40,5 +40,9 @@ def parse_parameters(text: str) -> dict[str, float]:
     for param, pattern in _PATTERNS.items():
         match = re.search(pattern, text, re.IGNORECASE)
         if match:
-            extracted[param] = float(match.group(1))
+            try:
+                num_str = match.group(1).replace(",", ".")
+                extracted[param] = float(num_str)
+            except ValueError:
+                pass
     return extracted

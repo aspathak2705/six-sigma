@@ -20,11 +20,9 @@ def analyze(body: ParameterInput):
         raise HTTPException(status_code=500, detail="QC reference data could not be loaded.")
 
     results = []
-    for param, value in body.values.items():
-        if param not in qc:
-            continue
-        result = calculate_sigma(param, value, qc[param])
-        results.append(result)
+    for param in qc.keys():
+        value = body.values.get(param, None)
+        results.append(calculate_sigma(param, value, qc[param]))
 
     if not results:
         raise HTTPException(status_code=400, detail="No matching QC parameters found for provided values.")

@@ -28,20 +28,20 @@ async def upload_report(file: UploadFile = File(...)):
     text = extract_text_from_bytes(content, content_type)
 
     if not text.strip():
-        raise HTTPException(status_code=422, detail="Could not extract any text from the file.")
+        raise HTTPException(status_code=400, detail="Could not extract any text from the file.")
 
     extracted = parse_parameters(text)
     if not extracted:
         raise HTTPException(
-            status_code=422,
+            status_code=400,
             detail="No hematology parameters found. Try manual entry or a clearer image."
         )
 
     qc = load_qc_data()
     results = []
-    for param, value in extracted.items():
-        if param in qc:
-            results.append(calculate_sigma(param, value, qc[param]))
+    for param in qc.keys():
+        value = extracted.get(param, None)
+        results.append(calculate_sigma(param, value, qc[param]))
 
     return {
         "status":          "success",
